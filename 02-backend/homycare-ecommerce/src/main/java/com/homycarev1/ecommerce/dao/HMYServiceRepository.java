@@ -8,5 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource(collectionResourceRel = "HMYService", path = "hmyservice")
 public interface HMYServiceRepository extends JpaRepository <HMYService, Long> {
 
+/* test */
 
 }
