@@ -43,7 +43,7 @@ AUTO_INCREMENT = 1;
 INSERT INTO hmyservice_category(hmyservice_name) VALUES ('HMYSERVICES');
 
 INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created)
-VALUES ('House Cleaning', 'House cleaning including sweeping, vacumming and washing',
+VALUES ('House Cleaning', 'House cleaning including sweeping, vacuuuming and washing',
 'assets/images/products/placeholder.png'
 ,1,1, NOW());
 
