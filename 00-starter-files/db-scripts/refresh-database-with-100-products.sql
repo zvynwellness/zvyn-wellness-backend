@@ -45,14 +45,14 @@ INSERT INTO hmyservice_category(hmyservice_name) VALUES ('Babysitting');
 -- -----------------------------------------------------
 -- House Cleaning
 -- -----------------------------------------------------
-INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('House Cleaning AZ', 'Sweeping, vacuuming and washing','assets/images/products/gardenning/gardening-homycare-1000.png',1,1, NOW());
-INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('House Cleaning NY', 'Toilet cleaning','assets/images/products/gardenning/gardening-homycare-1001.png',1,1, NOW());
+INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('House Cleaning AZ', 'Sweeping, vacuuming and washing','assets/images/products/housecleaning/housecleaning-homycare-1000.png',1,1, NOW());
+INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('House Cleaning NY', 'Toilet cleaning','assets/images/products/housecleaning/housecleaning-homycare-1001.png',1,1, NOW());
 
 -- -----------------------------------------------------
 -- Gardening
 -- -----------------------------------------------------
-INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('Garden Cleaning AZ', 'Garden size up to 10m', 'assets/images/products/housecleaning/housecleaning-homycare-1000.png',1,2, NOW());
-INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('Garden Cleaning NY', 'Garden size up to 10m', 'assets/images/products/housecleaning/housecleaning-homycare-1001.png',1,2, NOW());
+INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('Garden Cleaning AZ', 'Garden size up to 10m', 'assets/images/products/gardenning/gardening-homycare-1000.png',1,2, NOW());
+INSERT INTO hmyservice (name, description, image_url, active, category_id, date_created) VALUES ('Garden Cleaning NY', 'Garden size up to 10m', 'assets/images/products/gardenning/gardening-homycare-1001.png',1,2, NOW());
 
 -- -----------------------------------------------------
 -- Babysitting
