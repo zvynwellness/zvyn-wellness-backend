@@ -5,15 +5,14 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name="hmyservice")
+@Table(name="product")
 @Data
 //auto generate getter and setter by lombok
 
-public class HMYService {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +21,7 @@ public class HMYService {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private HMYServiceCategory category;
+    private ProductCategory category;
 
     @Column(name = "name")
     private String name;

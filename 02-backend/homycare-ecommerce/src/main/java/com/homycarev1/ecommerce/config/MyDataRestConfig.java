@@ -1,7 +1,7 @@
 package com.homycarev1.ecommerce.config;
 
-import com.homycarev1.ecommerce.entity.HMYService;
-import com.homycarev1.ecommerce.entity.HMYServiceCategory;
+import com.homycarev1.ecommerce.entity.Product;
+import com.homycarev1.ecommerce.entity.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -32,13 +32,13 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
         //disable HTTP Method for product :  PUT, Post, Delete
         config.getExposureConfiguration()
-                .forDomainType(HMYService.class)
+                .forDomainType(Product.class)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
 
         //disable HTTP Method for product category:  PUT, Post, Delete
         config.getExposureConfiguration()
-                .forDomainType(HMYServiceCategory.class)
+                .forDomainType(ProductCategory.class)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
 
