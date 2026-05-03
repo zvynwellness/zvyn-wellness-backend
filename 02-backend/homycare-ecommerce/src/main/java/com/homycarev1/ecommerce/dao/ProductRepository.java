@@ -13,4 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface ProductRepository extends JpaRepository <Product, Long> {
     Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
 
+    Page<Product> findByNameContaining(@Param("name") String id, Pageable pageable);
+    //CONCAT ('%',:name,'%')
+    //API to test this function : http://localhost:8080/api/products/search/findByNameContaining?name=garden
+
 }
