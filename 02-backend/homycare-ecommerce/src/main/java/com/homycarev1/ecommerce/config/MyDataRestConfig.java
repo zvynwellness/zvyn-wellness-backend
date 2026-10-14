@@ -28,7 +28,17 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
-        HttpMethod[] theUnsupportedActions = {HttpMethod.PUT , HttpMethod.POST, HttpMethod.DELETE};
+        cors.addMapping("/api/**")
+                .allowedOrigins(
+                        "http://localhost:4200",
+                        "http://127.0.0.1:4200",
+                        "http://localhost:4300",
+                        "http://127.0.0.1:4300",
+                        "https://www.zvyn-co.com",
+                        "https://zvyn-wellness.com",
+                        "https://www.zvyn-wellness.com")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
+        HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.POST, HttpMethod.DELETE};
 
         //disable HTTP Method for product :  PUT, Post, Delete
         config.getExposureConfiguration()
