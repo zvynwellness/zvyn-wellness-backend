@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/account/signup", "/account/signup").permitAll()
+                        // Public self-registration is disabled. Accounts are provisioned by an administrator.
+                        .requestMatchers(HttpMethod.POST, "/api/account/signup", "/account/signup").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
