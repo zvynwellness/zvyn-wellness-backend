@@ -114,6 +114,7 @@ public class AdminDashboardController {
         service.setName(request.name().trim());
         service.setSlug(request.slug().trim().toLowerCase());
         service.setDescription(request.description().trim());
+        service.setCategory(request.category().trim().toUpperCase());
         service.setDurationMinutes(request.durationMinutes());
         service.setImageUrl(request.imageUrl());
         service.setDisplayOrder(request.displayOrder());
@@ -142,7 +143,7 @@ public class AdminDashboardController {
                                 List<EmployeeView> employees, List<MonthlyServiceView> monthlyServices) { }
     public record ConfirmRequest(@NotNull Long employeeId) { }
     public record ServiceRequest(@NotBlank @Size(max=120) String name, @NotBlank @Size(max=140) String slug,
-                                 @NotBlank @Size(max=1600) String description, @Min(15) @Max(480) int durationMinutes,
+                                 @NotBlank @Size(max=1600) String description, @NotBlank @Pattern(regexp="MOVE|REFLECT|RESTORE_EXPLORE", message="Category must be Move, Reflect, or Restore & Explore") String category, @Min(15) @Max(480) int durationMinutes,
                                  String imageUrl, int displayOrder, boolean active,
                                  @Min(0) int customerCapacity, @Min(0) int employeeCapacity,
                                  @NotBlank @Size(max=255) String location,
@@ -151,11 +152,11 @@ public class AdminDashboardController {
                                  @NotBlank @Size(min=3, max=3) String currency,
                                  @NotNull LocalDateTime scheduledDateTime, Long instructorEmployeeId) { }
     public record MonthlyServiceRequest(@NotNull Long serviceId) { }
-    public record ServiceView(Long id, String name, String slug, String description, int durationMinutes,
+    public record ServiceView(Long id, String name, String slug, String description, String category, int durationMinutes,
                               String imageUrl, int displayOrder, boolean active, int customerCapacity,
                               int employeeCapacity, String location, String googleMapsUrl, BigDecimal priceAmount, String currency,
                               LocalDateTime scheduledDateTime, Long instructorEmployeeId, String instructorName) {
-        static ServiceView from(WellnessService value) { return new ServiceView(value.getId(), value.getName(), value.getSlug(), value.getDescription(), value.getDurationMinutes(), value.getImageUrl(), value.getDisplayOrder(), value.isActive(), value.getCustomerCapacity(), value.getEmployeeCapacity(), value.getLocation(), value.getGoogleMapsUrl(), value.getPriceAmount(), value.getCurrency(), value.getScheduledDateTime(), value.getInstructor() == null ? null : value.getInstructor().getId(), value.getInstructor() == null ? null : value.getInstructor().getUser().getFullName()); }
+        static ServiceView from(WellnessService value) { return new ServiceView(value.getId(), value.getName(), value.getSlug(), value.getDescription(), value.getCategory(), value.getDurationMinutes(), value.getImageUrl(), value.getDisplayOrder(), value.isActive(), value.getCustomerCapacity(), value.getEmployeeCapacity(), value.getLocation(), value.getGoogleMapsUrl(), value.getPriceAmount(), value.getCurrency(), value.getScheduledDateTime(), value.getInstructor() == null ? null : value.getInstructor().getId(), value.getInstructor() == null ? null : value.getInstructor().getUser().getFullName()); }
     }
     public record EmployeeView(Long id, String name, String jobTitle, String specialty) {
         static EmployeeView from(EmployeeProfile value) { return new EmployeeView(value.getId(), value.getUser().getFullName(), value.getJobTitle(), value.getSpecialty()); }

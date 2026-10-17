@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `wellness_service` (
   `name` VARCHAR(120) NOT NULL,
   `slug` VARCHAR(140) NOT NULL,
   `description` VARCHAR(1600) NOT NULL,
+  `category` VARCHAR(30) NOT NULL DEFAULT 'MOVE',
   `duration_minutes` INT NOT NULL,
   `image_url` VARCHAR(255) DEFAULT NULL,
   `display_order` INT NOT NULL DEFAULT 0,
@@ -49,6 +50,10 @@ CREATE TABLE IF NOT EXISTS `wellness_service` (
   KEY `idx_wellness_service_instructor` (`instructor_employee_id`),
   CONSTRAINT `fk_wellness_service_instructor` FOREIGN KEY (`instructor_employee_id`) REFERENCES `employee_profile` (`id`)
 ) ENGINE=InnoDB;
+
+ALTER TABLE `wellness_service` ADD COLUMN IF NOT EXISTS `category` VARCHAR(30) NOT NULL DEFAULT 'MOVE';
+UPDATE `wellness_service` SET `category` = 'MOVE' WHERE `category` IS NULL OR TRIM(`category`) = '';
+UPDATE `wellness_service` SET `category` = 'REFLECT' WHERE `slug` = 'yoga-x-journaling';
 
 UPDATE `wellness_service` SET `customer_capacity` = 10 WHERE `customer_capacity` < 0;
 UPDATE `wellness_service` SET `employee_capacity` = 5 WHERE `employee_capacity` < 0;
@@ -123,14 +128,15 @@ UPDATE `purpose_content` SET
 WHERE `active` = 1;
 
 INSERT INTO `wellness_service`
-  (`name`, `slug`, `description`, `duration_minutes`, `image_url`, `display_order`, `active`, `date_created`)
+  (`name`, `slug`, `description`, `category`, `duration_minutes`, `image_url`, `display_order`, `active`, `date_created`)
 VALUES
-  ('Private Movement', 'private-movement', 'One-to-one movement guidance adapted to your body, ability, goals, and pace.', 60, 'assets/images/products/wellness/journey.svg', 1, 1, NOW()),
-  ('Restorative Wellness', 'restorative-wellness', 'A gentle restorative session centered on rest, recovery, nourishment, and sustainable daily rhythms.', 60, 'assets/images/products/wellness/restore.svg', 2, 1, NOW()),
-  ('Guided Mindfulness', 'guided-mindfulness', 'Personal mindfulness practice that supports calm attention, emotional steadiness, and greater clarity.', 45, 'assets/images/products/wellness/mindful.svg', 3, 1, NOW())
+  ('Private Movement', 'private-movement', 'One-to-one movement guidance adapted to your body, ability, goals, and pace.', 'MOVE', 60, 'assets/images/products/wellness/journey.svg', 1, 1, NOW()),
+  ('Restorative Wellness', 'restorative-wellness', 'A gentle restorative session centered on rest, recovery, nourishment, and sustainable daily rhythms.', 'RESTORE_EXPLORE', 60, 'assets/images/products/wellness/restore.svg', 2, 1, NOW()),
+  ('Guided Mindfulness', 'guided-mindfulness', 'Personal mindfulness practice that supports calm attention, emotional steadiness, and greater clarity.', 'REFLECT', 45, 'assets/images/products/wellness/mindful.svg', 3, 1, NOW())
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
+  `category` = VALUES(`category`),
   `duration_minutes` = VALUES(`duration_minutes`),
   `image_url` = VALUES(`image_url`),
   `display_order` = VALUES(`display_order`),

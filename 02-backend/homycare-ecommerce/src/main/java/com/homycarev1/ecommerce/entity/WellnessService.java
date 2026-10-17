@@ -28,6 +28,9 @@ public class WellnessService {
     @Column(nullable = false, length = 1600)
     private String description;
 
+    @Column(nullable = false, length = 30, columnDefinition = "varchar(30) default 'MOVE'")
+    private String category = "MOVE";
+
     @Column(nullable = false)
     private Integer durationMinutes;
 
