@@ -34,7 +34,6 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
                         "http://127.0.0.1:4200",
                         "http://localhost:4300",
                         "http://127.0.0.1:4300",
-                        "https://www.zvyn-co.com",
                         "https://zvyn-wellness.com",
                         "https://www.zvyn-wellness.com")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");

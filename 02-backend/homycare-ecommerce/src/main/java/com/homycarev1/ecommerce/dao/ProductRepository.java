@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = {
         "http://localhost:4300",
-        "https://www.zvyn-co.com"
+        "http://localhost:4200",
+        "https://zvyn-wellness.com",
+        "https://www.zvyn-wellness.com"
 })
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

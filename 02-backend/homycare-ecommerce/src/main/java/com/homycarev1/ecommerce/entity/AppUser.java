@@ -1,6 +1,7 @@
 package com.homycarev1.ecommerce.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,6 +25,7 @@ public class AppUser {
     private String email;
 
     @Column(nullable = false, length = 100)
+    @JsonIgnore
     private String passwordHash;
 
     @Enumerated(EnumType.STRING)

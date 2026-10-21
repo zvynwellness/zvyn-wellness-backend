@@ -39,17 +39,19 @@ public class ContactController {
                     "Email delivery is not configured. Set ZVYN_MAIL_USERNAME and ZVYN_MAIL_PASSWORD, then restart the backend.");
         }
 
+        String plan = request.plan() == null ? "" : request.plan().trim();
+
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
         message.setTo(recipient);
         message.setReplyTo(request.email().trim());
         message.setSubject("ZVyn Wellness consultation enquiry" +
-                (request.plan().isBlank() ? "" : " — " + request.plan().trim()));
+                (plan.isBlank() ? "" : " — " + plan));
         message.setText("Name: " + request.name().trim() +
                 "\nTelephone: " + request.telephone().trim() +
                 "\nEmail: " + request.email().trim() +
                 "\nPreferred contact: " + request.preference().trim() +
-                "\nPricing option: " + (request.plan().isBlank() ? "General enquiry" : request.plan().trim()) +
+                "\nPricing option: " + (plan.isBlank() ? "General enquiry" : plan) +
                 "\n\nConsultation details:\n" + request.details().trim());
         try {
             mailSender.send(message);
